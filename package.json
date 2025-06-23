@@ -1,0 +1,25 @@
+{
+  "name": "ming_trader_bot_tg",
+  "version": "1.0.0",
+  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/13x54n/ming_trader_bot_tg.git"
+  },
+  "main": "index.js",
+  "bugs": {
+    "url": "https://github.com/13x54n/ming_trader_bot_tg/issues"
+  },
+  "description": "",
+  "homepage": "https://github.com/13x54n/ming_trader_bot_tg#readme",
+  "license": "ISC",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "commonjs",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "node-telegram-bot-api": "^0.63.0",
+    "telegraf": "^4.16.3"
+  }
+}
