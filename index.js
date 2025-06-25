@@ -1,51 +1,46 @@
+require("dotenv").config();
 const { Telegraf } = require("telegraf");
 const { message } = require("telegraf/filters");
-require("dotenv").config();
+const startCommand = require("./src/controllers/start.command");
+const getCommandList = require("./src/helpers/getCommandList");
+require("./src/middlewares/dbConnection"); // 🔌 Ensure database connection is established
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
-// bot.command('quit', async (ctx) => {
-//   // Explicit usage
-//   await ctx.telegram.leaveChat(ctx.message.chat.id)
+// 🚀 Handle /start command
+bot.start(startCommand);
 
-//   // Using context shortcut
-//   await ctx.leaveChat()
-// })
+// 📖 Handle /help command
+bot.command("help", async (ctx) => {
+  await ctx.reply(getCommandList(), { parse_mode: "Markdown" });
+});
 
+// 💬 Handle random text messages
 bot.on(message("text"), async (ctx) => {
-  // Explicit usage
-  // await ctx.telegram.sendMessage(ctx.message.chat.id, `Hello User}`)
-
-  // Using context shortcut
+  // Example: Echo with markdown
   await ctx.replyWithMarkdownV2(`Hello, *${ctx.message.from.id}\\!*`);
 });
 
-// bot.on('callback_query', async (ctx) => {
-//   // Explicit usage
-//   await ctx.telegram.answerCbQuery(ctx.callbackQuery.id)
-
-//   // Using context shortcut
-//   await ctx.answerCbQuery()
-// })
-
-// bot.on('inline_query', async (ctx) => {
-//   const result = []
-//   // Explicit usage
-//   await ctx.telegram.answerInlineQuery(ctx.inlineQuery.id, result)
-
-//   // Using context shortcut
-//   await ctx.answerInlineQuery(result)
-// })
-
-bot
-  .launch()
-  .then(() => {
-    console.log("Bot is up and running");
-  })
-  .catch((err) => {
-    console.error("Failed to launch bot:", err);
-  });
-
-// Enable graceful stop
+// ⛔ Graceful shutdown handlers
 process.once("SIGINT", () => bot.stop("SIGINT"));
 process.once("SIGTERM", () => bot.stop("SIGTERM"));
+
+// 🚀 Start the bot
+bot.launch();
+console.log("Bot is running...");
+
+// ---
+// 📝 OPTIONAL: Uncomment and expand later if needed
+
+// bot.command("quit", async (ctx) => {
+//   await ctx.leaveChat(); // Leave the chat
+// });
+
+// bot.on("callback_query", async (ctx) => {
+//   await ctx.answerCbQuery(); // For inline buttons
+// });
+
+// bot.on("inline_query", async (ctx) => {
+//   const result = []; // Fill with dynamic search results
+//   await ctx.answerInlineQuery(result);
+// });
