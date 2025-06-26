@@ -1,7 +1,7 @@
 {
   "name": "ming_trader_bot_tg",
   "version": "1.0.0",
-  "author": "",
+  "author": "Laxman Rai <not.so.lexy@gmail.com>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/13x54n/ming_trader_bot_tg.git"
@@ -20,6 +20,7 @@
   },
   "type": "commonjs",
   "dependencies": {
+    "ccxt": "^4.4.91",
     "dotenv": "^16.5.0",
     "mongoose": "^8.16.0",
     "node-telegram-bot-api": "^0.63.0",
