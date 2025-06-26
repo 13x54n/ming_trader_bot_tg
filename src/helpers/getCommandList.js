@@ -1,10 +1,9 @@
 module.exports = getCommandList = (firstName) => `
 ${firstName ? `Yo ${firstName}, welcome to the squad 🫡` : ""}
-
 🧠 *Available Commands:*
 
 /start - Initialize the bot  
-/createwallet - 🔐 Spin up an abstract wallet  
+/addBalance - 💰 Add balance to your account
 /profile - 👤 View your profile info  
 /help - ❓ Show this help menu
 

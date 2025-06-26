@@ -1,6 +1,6 @@
 // Description: Controller to add a ticker to existing user's portfolio using tg commands
 module.exports = addTickerToPortfolio = async (ctx) => {
-  const { id, username, first_name, last_name } = ctx.from;
+  const { id } = ctx.from;
   const ticker = ctx.message.text.split(" ")[1]?.toUpperCase();
 
   if (!ticker) {
