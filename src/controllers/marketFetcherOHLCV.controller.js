@@ -55,16 +55,16 @@ async function storeOHLCVCandle(ohlcvData) {
 
   } catch (error) {
     if (error.code === 11000) {
-        console.warn(`[${ohlcvData.closeTime.toISOString()}] ${ohlcvData.symbol}: Duplicate candle detected (already processed).`);
+      console.warn(`[${ohlcvData.closeTime.toISOString()}] ${ohlcvData.symbol}: Duplicate candle detected (already processed).`);
     } else {
-        console.error('Error storing data to MongoDB:', error);
+      console.error('Error storing data to MongoDB:', error);
     }
   }
 }
 
 // --- Main Bot Logic ---
 const SYMBOL = 'BTC/USDT';
-const TIMEFRAME = '1m'; 
+const TIMEFRAME = '1m';
 const INTERVAL_MS = 60 * 1000; // Fetch every 60 seconds for 1-minute candles
 
 async function fetchAndStoreOHLCV() {
@@ -88,7 +88,6 @@ async function fetchAndStoreOHLCV() {
 async function startDataCollector() {
   // IMPORTANT: This module assumes Mongoose is ALREADY connected
   // by the time `startDataCollector()` is called from your main app.
-  console.log(`Starting data collection for ${SYMBOL} ${TIMEFRAME} every ${INTERVAL_MS / 1000} seconds...`);
 
   await fetchAndStoreOHLCV();
 
@@ -98,6 +97,8 @@ async function startDataCollector() {
     } catch (e) {
       console.error(`Error in scheduled fetch: ${e.message}`);
     }
+
+    console.log(`Starting data collection for ${SYMBOL} ${TIMEFRAME} every ${INTERVAL_MS / 1000} seconds...`);
   }, INTERVAL_MS);
 }
 

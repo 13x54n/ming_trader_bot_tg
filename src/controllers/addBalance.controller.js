@@ -16,7 +16,7 @@ module.exports = addBalance = async (ctx) => {
             {
               text: "Continue",
               //   web_app: { url: process.env.APP_URL },
-              web_app: { url: "https://minghq.vercel.app" },
+              web_app: { url: `http://localhost:3000/?tgId=${ctx.from.id}` },
             },
           ],
         ],

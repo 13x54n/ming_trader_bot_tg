@@ -18,7 +18,6 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 // --- Main Application Initialization ---
 async function initializeApp() {
   try {
-    console.log("Starting market data collection...");
     await startDataCollector(); // Use await if startDataCollector has an initial async task
 
     console.log("Registering Telegraf bot handlers...");
@@ -40,27 +39,7 @@ async function initializeApp() {
   }
 }
 
-// --- Graceful shutdown handlers ---
-// It's better to manage mongoose disconnection here for cleaner shutdown
-process.once("SIGINT", async () => {
-  console.log("\nSIGINT received. Stopping bot...");
-  await bot.stop("SIGINT");
-  if (mongoose.connection.readyState === 1) {
-    await mongoose.disconnect();
-    console.log("MongoDB disconnected.");
-  }
-  process.exit(0);
-});
 
-process.once("SIGTERM", async () => {
-  console.log("\nSIGTERM received. Stopping bot...");
-  await bot.stop("SIGTERM");
-  if (mongoose.connection.readyState === 1) {
-    await mongoose.disconnect();
-    console.log("MongoDB disconnected.");
-  }
-  process.exit(0);
-});
 
 process.on("uncaughtException", (error) => {
   console.error("Uncaught Exception:", error);
